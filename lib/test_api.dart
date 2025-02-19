@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:api_practice/model/data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,7 +12,7 @@ class TestApi extends StatefulWidget {
 }
 
 class _TestApiState extends State<TestApi> {
-  Map<String, dynamic> mData = {};
+  DataModel? mData;
   @override
   void initState() {
     super.initState();
@@ -20,29 +21,39 @@ class _TestApiState extends State<TestApi> {
 
   void getApiValue() async {
     // api client call
-    String url = 'https://dummyjson.com/quotes';
+  //   String url = 'https://dummyjson.com/quotes';
 
+  //   http.Response response = await http.get(Uri.parse(url));
+
+  //   if(response.statusCode == 200){
+  //     mData = jsonDecode(response.body);
+  //     setState(() {
+        
+  //     });
+  //  } else{
+  //     print("status code: ${response.statusCode}");
+  //  }
+
+    String url = 'https://dummyjson.com/products';
     http.Response response = await http.get(Uri.parse(url));
 
     if(response.statusCode == 200){
-      mData = jsonDecode(response.body);
+      mData = DataModel.fromJson(jsonDecode(response.body));
       setState(() {
         
       });
-   } else{
-      print("status code: ${response.statusCode}");
-   }
+    }
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("API call"),),
-      body: mData.isNotEmpty ? ListView.builder(itemCount: mData['quotes'].length, itemBuilder: (ctx, index){
+      body: mData!=null ? mData!.products!.isNotEmpty ? ListView.builder(itemCount: mData!.products!.length, itemBuilder: (ctx, index){
         return ListTile(
-          title: Text(mData['quotes'][index]['author'], style: TextStyle(fontWeight: FontWeight.bold),),
-          subtitle: Text(mData['quotes'][index]['quote']),
+          title: Text(mData!.products![index].discountPercentage.toString(), style: TextStyle(fontWeight: FontWeight.bold),),
+          subtitle: Text(mData!.products![index].price.toString()),
         );
-      }) : Container(),
+      }) : Center(child: Text('No data found!!'),) : Container(),
     );
   }
 }
