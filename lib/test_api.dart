@@ -50,8 +50,9 @@ class _TestApiState extends State<TestApi> {
       appBar: AppBar(title: Text("API call"),),
       body: mData!=null ? mData!.products!.isNotEmpty ? ListView.builder(itemCount: mData!.products!.length, itemBuilder: (ctx, index){
         return ListTile(
-          title: Text(mData!.products![index].discountPercentage.toString(), style: TextStyle(fontWeight: FontWeight.bold),),
-          subtitle: Text(mData!.products![index].price.toString()),
+          // leading: Image.network(mData!.products![index].images!=null ?? Text('No ima),
+          title: Text(mData!.products![index].title ?? "No title", style: TextStyle(fontWeight: FontWeight.bold),),
+          subtitle: Text(mData!.products![index].description ?? 'No description'),
         );
       }) : Center(child: Text('No data found!!'),) : Container(),
     );

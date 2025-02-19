@@ -20,10 +20,10 @@ class ProductModel {
   String? title;
   String? warrantyInformation;
   int? weight;
-  List<String>? tags;
+  List<dynamic>? tags;
   List<ReviewsModel>? reviews;
   MetaModel? meta;
-  List<String>? images;
+  List<dynamic>? images;
   DimentionModel? dimensions;
 
   ProductModel({required this.availabilityStatus, required this.brand, required this.category, required this.description, required this.dimensions, required this.discountPercentage, required this.id, required this.images, required this.meta, required this.minimumOrderQuantity, required this.price, required this.rating, required this.returnPolicy, required this.reviews, required this.shippingInformation, required this.sku, required this.stock, required this.tags, required this.thumbnail, required this.title, required this.warrantyInformation, required this.weight});
@@ -38,17 +38,17 @@ class ProductModel {
     }
 
     // Tags
-    List<String> listTags = [];
-    for(String eachTags in json['tags']){
-      listTags.add(eachTags); 
-    }
+    // List<String> listTags = [];
+    // for(String eachTags in json['tags']){
+    //   listTags.add(eachTags); 
+    // }
 
     // Images
-    List<String> listImages = [];
-    for(String eachImage in json['images']){
-      listImages.add(eachImage);
-    }
+    // List<String> listImages = [];
+    // for(String eachImage in json['images']){
+    //   listImages.add(eachImage);
+    // }
 
-    return ProductModel(availabilityStatus: json['availabilityStatus'], brand: json['brand'], category: json['category'], description: json['description'], dimensions: DimentionModel.fromJson(json['dimensions']), discountPercentage: json['discountPercentage'], id: json['id'], images: listImages, meta: MetaModel.fromJson(json['meta']), minimumOrderQuantity: json['minimumOrderQuantity'], price: json['price'], rating: json['rating'], returnPolicy: json['returnPolicy'], reviews: listReviews, shippingInformation: json['shippingInformation'], sku: json['sku'], stock: json['stock'], tags: listTags, thumbnail: json['thumbnail'], title: json['title'], warrantyInformation: json['warrantyInformation'], weight: json['weight']);
+    return ProductModel(availabilityStatus: json['availabilityStatus'], brand: json['brand'], category: json['category'], description: json['description'], dimensions: DimentionModel.fromJson(json['dimensions']), discountPercentage: json['discountPercentage'], id: json['id'], images: json['images'], meta: MetaModel.fromJson(json['meta']), minimumOrderQuantity: json['minimumOrderQuantity'], price: json['price'], rating: json['rating'], returnPolicy: json['returnPolicy'], reviews: listReviews, shippingInformation: json['shippingInformation'], sku: json['sku'], stock: json['stock'], tags: json['tags'], thumbnail: json['thumbnail'], title: json['title'], warrantyInformation: json['warrantyInformation'], weight: json['weight']);
   }
 }

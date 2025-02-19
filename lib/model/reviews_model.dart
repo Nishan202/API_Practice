@@ -1,6 +1,6 @@
 class ReviewsModel {
   String? comment;
-  DateTime? date;
+  String? date;
   int? rating;
   String? reviewerEmail;
   String? reviewerName;

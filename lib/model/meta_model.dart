@@ -1,8 +1,8 @@
 class MetaModel {
   String? barcode;
-  DateTime? createdAt;
+  String? createdAt;
   String? qrCode;
-  DateTime? updatedAt;
+  String? updatedAt;
 
   MetaModel({required this.barcode, required this.createdAt, required this.qrCode, required this.updatedAt});
 
