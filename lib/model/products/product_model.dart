@@ -1,6 +1,6 @@
-import 'package:api_practice/model/dimention_model.dart';
-import 'package:api_practice/model/meta_model.dart';
-import 'package:api_practice/model/reviews_model.dart';
+import 'package:api_practice/model/products/dimention_model.dart';
+import 'package:api_practice/model/products/meta_model.dart';
+import 'package:api_practice/model/products/reviews_model.dart';
 
 class ProductModel {
   String? availabilityStatus;

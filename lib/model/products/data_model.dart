@@ -1,4 +1,4 @@
-import 'package:api_practice/model/product_model.dart';
+import 'package:api_practice/model/products/product_model.dart';
 
 class DataModel {
   int? limit;
