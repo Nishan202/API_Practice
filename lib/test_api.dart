@@ -4,20 +4,10 @@ import 'package:api_practice/model/products/data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class TestApi extends StatefulWidget {
+class TestApi extends StatelessWidget {
   const TestApi({super.key});
 
-  @override
-  State<TestApi> createState() => _TestApiState();
-}
-
-class _TestApiState extends State<TestApi> {
-  @override
-  void initState() {
-    super.initState();
-    // getApiValue();
-  }
-
+  // @override
   Future<DataModel?> getApiValue() async {
     // api client call
   //   String url = 'https://dummyjson.com/quotes';
@@ -44,6 +34,7 @@ class _TestApiState extends State<TestApi> {
       return null;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
