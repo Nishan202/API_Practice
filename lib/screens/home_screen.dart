@@ -44,26 +44,19 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(),
       body: BlocBuilder<WeatherBloc, WeatherState>(builder: (ctx, state){
         if(state is WeatherLoadingState){
-          return Center(child: CircularProgressIndicator(),);
+          return const Center(child: CircularProgressIndicator(),);
         }
         else if(state is WeatherErrorState){
-          return Center(child: Text('${state.erroMessage}'),);
+          return Center(child: Text(state.erroMessage),);
         } else if(state is WeatherLoadedState){
           var weatherDataModel = state.responseData;
-          return Stack(
-            children: [
-              // 1) Background image
-              Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/rainy_season.jpg"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-
-              // 2) Main content with scroll
-              SingleChildScrollView(
+          return Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/rainy_season.jpg'),
+                  fit: BoxFit.cover),
+            ),
+            child: SingleChildScrollView(
                 child: Column(
                   children: [
                     const SizedBox(height: 40), // Top padding for status bar
@@ -75,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           // Location name
                           Expanded(
                             child: Text(
-                              "Kolkata",
+                              weatherDataModel.name.toString(),
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -109,16 +102,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 20),
 
                     // -- WEATHER STATUS + TEMPERATURE
-                    Text(
-                      'Partly sunny',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.black54,
-                      ),
-                    ),
+                    (weatherDataModel.weather!=null && weatherDataModel.weather!.isNotEmpty) ? Text(
+                            // 'Partly sunny',
+                            weatherDataModel.weather![0].description!,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.black54,
+                            ),
+                          ) : Container(),
                     const SizedBox(height: 8),
                     Text(
-                      "14°C",
+                      "${weatherDataModel.main!.temp}°C",
                       style: const TextStyle(
                         fontSize: 64,
                         fontWeight: FontWeight.bold,
@@ -132,18 +126,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Feels like: 18°",
+                          "Feels like: ${weatherDataModel.main!.feels_like}°",
                           style: const TextStyle(fontSize: 16),
                         ),
                         const SizedBox(width: 10),
                         Text(
-                          "22°",
+                          "${weatherDataModel.main!.temp_max}°",
                           style:
                               const TextStyle(fontSize: 16, color: Colors.red),
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          "10°",
+                          "${weatherDataModel.main!.temp_min}°",
                           style:
                               const TextStyle(fontSize: 16, color: Colors.blue),
                         ),
@@ -162,14 +156,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Spacer(),
-                          Text(
-                            "72 Hours",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.blueGrey,
                             ),
                           ),
                         ],
@@ -222,12 +208,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       ),
                     ),
-
                     const SizedBox(height: 40),
                   ],
                 ),
               ),
-            ],
           );
         }
         return Container();
